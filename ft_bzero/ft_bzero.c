@@ -1,29 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcollas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/15 02:23:59 by rcollas           #+#    #+#             */
-/*   Updated: 2021/04/15 02:24:13 by rcollas          ###   ########.fr       */
+/*   Created: 2021/04/18 12:08:34 by rcollas           #+#    #+#             */
+/*   Updated: 2021/04/18 12:25:45 by rcollas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdio.h>
+#include <strings.h>
 
-void	ft_putnbr_fd(int n, int fd)
+void	ft_bzero(void *s, size_t n)
 {
-	long int	nb;
+	size_t i;
 
-	nb = n;
-	if (n < 0)
-	{
-		nb *= -1;
-		write(fd, "-", 1);
-	}
-	if (nb > 9)
-		ft_putnbr_fd(nb / 10, fd);
-	nb %= 10;
-	write(fd, &nb, 1);
+	i = 0;
+	while (i < n)
+		*(unsigned char *)(s + i++) = 0;
+}
+
+int	main(void)
+{
+	char rbzero[10] = "test";
+	char ft_rbzero[10] = "test";
+	printf("%s\n", rbzero);
+	bzero(rbzero, 2);
+	printf("%s\n", rbzero);
+	printf("%s\n", ft_rbzero);
+	ft_bzero(ft_rbzero, 2);
+	printf("%s\n", ft_rbzero);
 }

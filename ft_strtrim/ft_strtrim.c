@@ -6,12 +6,11 @@
 /*   By: rcollas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 10:35:25 by rcollas           #+#    #+#             */
-/*   Updated: 2021/04/15 10:35:26 by rcollas          ###   ########.fr       */
+/*   Updated: 2021/05/20 16:04:32 by rcollas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdio.h>
 
 static	int	is_charset(char c, char const *charset)
 {
@@ -25,7 +24,7 @@ static	int	is_charset(char c, char const *charset)
 
 static	int	ft_strlen(char const *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -35,7 +34,7 @@ static	int	ft_strlen(char const *str)
 
 static	int	ft_trim(char *trim_str, char const *set)
 {
-	int start;
+	int	start;
 
 	start = 0;
 	while (is_charset(*trim_str, set))
@@ -56,14 +55,15 @@ static	int	ft_trim(char *trim_str, char const *set)
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char *trim_str;
-	int s1_len;
-	int i;
+	char	*trim_str;
+	int		s1_len;
+	int		i;
 
 	i = 0;
 	s1_len = ft_strlen(s1);
-	if (!(trim_str = (char *)malloc(sizeof(*trim_str) * s1_len + 1)))
-		return NULL;
+	trim_str = (char *)malloc(sizeof(*trim_str) * s1_len + 1);
+	if (!trim_str)
+		return (NULL);
 	while (s1[i])
 	{
 		trim_str[i] = s1[i];

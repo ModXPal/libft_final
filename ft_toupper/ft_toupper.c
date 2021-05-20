@@ -6,7 +6,7 @@
 /*   By: rcollas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 12:20:15 by rcollas           #+#    #+#             */
-/*   Updated: 2021/04/26 12:22:34 by rcollas          ###   ########.fr       */
+/*   Updated: 2021/05/20 16:04:15 by rcollas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static int	ft_islower(int c)
 		return (1);
 	return (0);
 }
+
 int	ft_toupper(int c)
 {
 	if (ft_islower(c))

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcollas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/02 09:15:49 by rcollas           #+#    #+#             */
-/*   Updated: 2021/05/24 15:42:53 by rcollas          ###   ########.fr       */
+/*   Created: 2021/05/24 16:51:17 by rcollas           #+#    #+#             */
+/*   Updated: 2021/05/24 17:11:44 by rcollas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	is_charset(char c, char charset)
 	return (0);
 }
 
-static unsigned int	ft_ustrlen(char const *str, char charset)
+static unsigned int	ft_ult_strlen(char const *str, char charset)
 {
 	unsigned int	i;
 
@@ -63,28 +63,28 @@ static char	**ft_free(char **str, unsigned int size)
 
 char	**ft_split(char const *s, char c)
 {
-	char			**split;
-	unsigned int	j;
+	char			**tab;
+	int				j;
 	unsigned int	i;
 	unsigned int	words;
 
 	words = ft_count_words(s, c);
 	i = -1;
-	split = (char **)malloc(sizeof(*split) * words + 1);
-	if (!split)
+	tab = (char **)malloc(sizeof(*tab) * (words + 1));
+	if (!tab)
 		return (NULL);
 	while (++i < words)
 	{
 		while (*s && is_charset(*s, c))
 			s++;
-		split[i] = (char *)malloc(sizeof(**split) * ft_ustrlen(s, c) + 1);
-		if (!split[i])
-			return (ft_free(split, i));
+		tab[i] = (char *)malloc(sizeof(**tab) * ft_ult_strlen(s, c) + 1);
+		if (!tab[i])
+			return (ft_free(tab, i));
 		j = 0;
 		while (*s && !is_charset(*s, c))
-			split[i][j++] = *s++;
-		split[i][j] = 0;
+			tab[i][j++] = *s++;
+		tab[i][j] = 0;
 	}
-	split[i] = 0;
-	return (split);
+	tab[i] = 0;
+	return (tab);
 }

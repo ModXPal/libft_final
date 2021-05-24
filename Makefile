@@ -33,7 +33,19 @@ SRCS		= ft_memset.c\
 			  ft_putendl_fd.c\
 			  ft_putnbr_fd.c\
 
-OBJS		= ${SRCS:.c=.o}
+BONUS		= ft_lstnew.c\
+			  ft_lstadd_front.c\
+			  ft_lstsize.c\
+			  ft_lstlast.c\
+			  ft_lstadd_back.c\
+			  ft_lstdelone.c\
+			  ft_lstclear.c\
+			  ft_lstiter.c\
+			  ft_lstmap.c\
+
+OBJS		= $(SRCS:.c=.o)
+
+OBJS_BONUS	= $(BONUS:.c=.o)
 
 NAME		= libft.a
 
@@ -43,17 +55,30 @@ RM			= rm -rf
 
 CFLAGS		= -Wall -Wextra -Werror -Iincludes
 
-all:		${NAME}
+all:		$(NAME)
 
-${NAME}:	${OBJS}
-				ar rc ${NAME} ${OBJS}
-				ranlib ${NAME}
+%.o : %.c
+	@${CC} -c ${CFLAGS} $< -o $@
+
+$(NAME):	${OBJS}
+				@ar rc $(NAME) $^
+				@echo "$(NAME) created"
+				@ranlib $(NAME)
+				@echo "$(NAME) table of contents added"
+
+bonus:		${OBJS} ${OBJS_BONUS}
+				@ar rc $(NAME) $^ 
+				@echo "$(NAME) created with bonus"
+				@ranlib $(NAME)
+				@echo "$(NAME) table of contents added"
 
 clean:
-				${RM} ${OBJS}
+				@${RM} ${OBJS} ${OBJS_BONUS}
+				@echo ".o deleted"
 
 fclean:		clean
-				${RM} ${NAME}
+				@${RM} $(NAME)
+				@echo "$(NAME) deleted"
 
 re:			fclean all
 

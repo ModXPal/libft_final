@@ -6,11 +6,11 @@
 /*   By: rcollas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 09:15:49 by rcollas           #+#    #+#             */
-/*   Updated: 2021/05/21 14:15:28 by rcollas          ###   ########.fr       */
+/*   Updated: 2021/05/24 15:42:53 by rcollas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 static int	is_charset(char c, char charset)
 {
@@ -19,9 +19,9 @@ static int	is_charset(char c, char charset)
 	return (0);
 }
 
-static int	ft_strlen(char const *str, char charset)
+static unsigned int	ft_ustrlen(char const *str, char charset)
 {
-	int	i;
+	unsigned int	i;
 
 	i = 0;
 	while (str[i] && !is_charset(str[i], charset))
@@ -29,55 +29,61 @@ static int	ft_strlen(char const *str, char charset)
 	return (i);
 }
 
-static int	ft_count_words(char const *str, char charset)
+static unsigned int	ft_count_words(char const *str, char charset)
 {
-	int	words_count;
-	int	is_word;
+	unsigned int	words_count;
+	unsigned int	is_word;
 
 	words_count = 0;
 	is_word = 1;
-	while (*str)
+	while (str && *str)
 	{
-		if (is_word && !is_charset(*str, charset))
+		if (is_charset(*str, charset))
+			is_word = 1;
+		else if (is_word == 1)
 		{
 			words_count++;
 			is_word = 0;
 		}
-		else if (is_charset(*str, charset))
-			is_word = 1;
 		str++;
 	}
 	return (words_count);
 }
 
+static char	**ft_free(char **str, unsigned int size)
+{
+	unsigned int	i;
+
+	i = 0;
+	while (i > size)
+		free(str[i++]);
+	free(str);
+	return (0);
+}
+
 char	**ft_split(char const *s, char c)
 {
-	char	**split;
-	int		j;
-	int		i;
-	int		words;
+	char			**split;
+	unsigned int	j;
+	unsigned int	i;
+	unsigned int	words;
 
 	words = ft_count_words(s, c);
-	i = 0;
-	j = 0;
-	split = (char **)malloc(sizeof(split) * ft_count_words(s, c) + 1);
+	i = -1;
+	split = (char **)malloc(sizeof(*split) * words + 1);
 	if (!split)
 		return (NULL);
-	while (i < words)
+	while (++i < words)
 	{
-		while (is_charset(*s, c))
+		while (*s && is_charset(*s, c))
 			s++;
-		split[i] = (char *)malloc(sizeof(*split) * ft_strlen(s, c) + 1);
+		split[i] = (char *)malloc(sizeof(**split) * ft_ustrlen(s, c) + 1);
 		if (!split[i])
-			return (NULL);
-		while (!is_charset(*s, c))
-		{
-			split[i][j++] = *s;
-			s++;
-		}
-		split[i][j] = 0;
+			return (ft_free(split, i));
 		j = 0;
-		i++;
+		while (*s && !is_charset(*s, c))
+			split[i][j++] = *s++;
+		split[i][j] = 0;
 	}
 	split[i] = 0;
 	return (split);

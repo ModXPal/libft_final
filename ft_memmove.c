@@ -6,7 +6,7 @@
 /*   By: rcollas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/18 21:55:41 by rcollas           #+#    #+#             */
-/*   Updated: 2021/05/21 17:35:36 by rcollas          ###   ########.fr       */
+/*   Updated: 2021/05/24 15:32:40 by rcollas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	const char *source;
-	char *destination;
+	const char	*source;
+	char		*destination;
 
 	source = (const char *)src;
 	destination = dest;

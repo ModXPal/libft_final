@@ -6,7 +6,7 @@
 /*   By: rcollas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 02:23:59 by rcollas           #+#    #+#             */
-/*   Updated: 2021/05/21 17:00:17 by rcollas          ###   ########.fr       */
+/*   Updated: 2021/05/22 16:46:27 by rcollas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 	if (nb > 9)
 		ft_putnbr_fd(nb / 10, fd);
-	nb %= 10;
+	nb = nb % 10 + 48;
 	write(fd, &nb, 1);
 }

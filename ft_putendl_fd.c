@@ -6,7 +6,7 @@
 /*   By: rcollas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 13:54:46 by rcollas           #+#    #+#             */
-/*   Updated: 2021/05/21 13:57:09 by rcollas          ###   ########.fr       */
+/*   Updated: 2021/05/23 12:00:32 by rcollas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
+	if (!s)
+		return ;
 	while (*s)
 		write(fd, s++, 1);
-	write (1, "\n", 1);
+	write (fd, "\n", 1);
 }

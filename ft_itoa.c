@@ -6,7 +6,7 @@
 /*   By: rcollas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 11:58:00 by rcollas           #+#    #+#             */
-/*   Updated: 2021/05/21 14:08:03 by rcollas          ###   ########.fr       */
+/*   Updated: 2021/05/22 17:10:52 by rcollas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static int	ft_intlen(long int nb)
 	long int	i;
 
 	i = 0;
+	if (nb == 0)
+		i++;
 	if (nb < 0)
 	{
 		i++;
@@ -43,13 +45,14 @@ char	*ft_itoa(int n)
 	nb = (char *)malloc(sizeof(*nb) * charlen + 1);
 	if (!nb)
 		return (NULL);
+	if (n == 0)
+		*nb = '0';
 	nb[charlen] = 0;
 	charlen--;
 	while (num > 0)
 	{
-		nb[charlen] = num % 10 + 48;
+		nb[charlen--] = num % 10 + 48;
 		num /= 10;
-		charlen--;
 	}
 	if (n < 0)
 		nb[charlen] = '-';

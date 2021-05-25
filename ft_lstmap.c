@@ -6,7 +6,7 @@
 /*   By: rcollas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 16:49:18 by rcollas           #+#    #+#             */
-/*   Updated: 2021/05/24 16:49:19 by rcollas          ###   ########.fr       */
+/*   Updated: 2021/05/25 19:12:32 by rcollas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	t_list	*new_cell;
 
 	new_lst = NULL;
-	if (!lst)
+	if (!lst || !f || !*f)
 		return (NULL);
 	while (lst)
 	{

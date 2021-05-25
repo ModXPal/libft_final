@@ -6,7 +6,7 @@
 /*   By: rcollas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 16:51:17 by rcollas           #+#    #+#             */
-/*   Updated: 2021/05/24 17:11:44 by rcollas          ###   ########.fr       */
+/*   Updated: 2021/05/25 19:10:04 by rcollas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,10 @@ char	**ft_split(char const *s, char c)
 	unsigned int	i;
 	unsigned int	words;
 
-	words = ft_count_words(s, c);
+	if (!s)
+		return (NULL);
 	i = -1;
-	tab = (char **)malloc(sizeof(*tab) * (words + 1));
+	tab = (char **)malloc(sizeof(*tab) * ((words = ft_count_words(s, c)) + 1));
 	if (!tab)
 		return (NULL);
 	while (++i < words)

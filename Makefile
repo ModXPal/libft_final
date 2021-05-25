@@ -60,13 +60,13 @@ all:		$(NAME)
 %.o : %.c
 	@${CC} -c ${CFLAGS} $< -o $@
 
-$(NAME):	${OBJS}
+$(NAME):	$(OBJS)
 				@ar rc $(NAME) $^
 				@echo "$(NAME) created"
 				@ranlib $(NAME)
 				@echo "$(NAME) table of contents added"
 
-bonus:		${OBJS} ${OBJS_BONUS}
+bonus:		$(OBJS) $(OBJS_BONUS)
 				@ar rc $(NAME) $^ 
 				@echo "$(NAME) created with bonus"
 				@ranlib $(NAME)
@@ -82,4 +82,4 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all clean fclean re
+.PHONY:		all clean fclean re bonus

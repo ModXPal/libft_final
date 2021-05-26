@@ -6,7 +6,7 @@
 /*   By: rcollas <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/24 16:51:11 by rcollas           #+#    #+#             */
-/*   Updated: 2021/05/25 18:47:04 by rcollas          ###   ########.fr       */
+/*   Updated: 2021/05/26 12:15:30 by rcollas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ void	ft_putstr_fd(char *s, int fd)
 {
 	if (!s)
 		return ;
-	while (*s)
+	while (s && *s)
 		write(fd, s++, 1);
 }
